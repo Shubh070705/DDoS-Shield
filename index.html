@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DDoS Protection Using Blockchain</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    };
+  </script>
+</head>
+<body class="bg-gray-900 text-white font-sans">
+  <!-- Header -->
+  <header class="flex justify-between items-center p-6 bg-gray-800 shadow-md">
+    <h1 class="text-2xl font-bold text-blue-400">DDoS Shield</h1>
+    <button id="themeToggle" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md transition">Toggle Theme</button>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="flex flex-col items-center justify-center text-center py-20 px-6">
+    <h2 class="text-4xl md:text-5xl font-bold text-blue-400 mb-4">DDoS Protection Using Blockchain</h2>
+    <p class="text-lg md:text-xl mb-6 max-w-2xl">
+      Secure your network traffic with decentralized protection powered by smart contracts and transparency.
+    </p>
+    <button id="connectWallet" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg shadow-lg transition duration-300">
+      Connect Wallet
+    </button>
+    <p id="walletAddress" class="mt-4 text-green-400 hidden"></p>
+  </section>
+
+  <!-- Features Section -->
+  <section id="features" class="bg-gray-800 py-16 px-6">
+    <div class="max-w-5xl mx-auto text-center">
+      <h3 class="text-3xl font-semibold mb-8 text-blue-300">Features</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="p-6 bg-gray-700 rounded-lg shadow-md">
+          <h4 class="text-xl font-bold mb-2">Decentralized Security</h4>
+          <p>Eliminate single points of failure using blockchain-based protection.</p>
+        </div>
+        <div class="p-6 bg-gray-700 rounded-lg shadow-md">
+          <h4 class="text-xl font-bold mb-2">Smart Contracts</h4>
+          <p>Automate detection and mitigation through verified smart contracts.</p>
+        </div>
+        <div class="p-6 bg-gray-700 rounded-lg shadow-md">
+          <h4 class="text-xl font-bold mb-2">Transparent Logging</h4>
+          <p>All DDoS activity is logged publicly to ensure transparency and traceability.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-400 py-6 bg-gray-900 border-t border-gray-700">
+    Made with ❤️ using Blockchain & TailwindCSS
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    // Dark Mode Toggle
+    const themeBtn = document.getElementById("themeToggle");
+    themeBtn.addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+      document.body.classList.toggle("bg-white");
+      document.body.classList.toggle("text-gray-900");
+    });
+
+    // Connect Wallet Logic
+    const walletBtn = document.getElementById("connectWallet");
+    const walletDisplay = document.getElementById("walletAddress");
+
+    walletBtn.addEventListener("click", async () => {
+      if (window.ethereum) {
+        try {
+          const accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+          const wallet = accounts[0];
+          walletBtn.textContent = "Wallet Connected";
+          walletDisplay.textContent = `Connected: ${wallet}`;
+          walletDisplay.classList.remove("hidden");
+
+          // Redirect to login page after connection
+          setTimeout(() => {
+            window.location.href = "login.html";
+          }, 1000);
+
+        } catch (error) {
+          alert("Wallet connection failed!");
+          console.error(error);
+        }
+      } else {
+        alert("Please install MetaMask to connect your wallet.");
+      }
+    });
+  </script>
+</body>
+</html>
